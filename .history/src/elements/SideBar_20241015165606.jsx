@@ -6,7 +6,6 @@ import {
   Users,
   ChevronRight,
   ChevronDown,
-  LayoutList,
 } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -30,7 +29,7 @@ const Sidebar = () => {
     } hover:text-primary`;
 
   return (
-    <nav className="grid items-start font-medium lg:px-4">
+    <nav className="grid items-start px-1 text-sm font-medium lg:px-2">
       <Link
         to="/"
         className={getLinkClasses("/")}
@@ -40,7 +39,11 @@ const Sidebar = () => {
         Home
       </Link>
 
-      <p className={getLinkClasses("/")} onClick={() => toggleInventory()}>
+      <Link
+        to={"#"}
+        className={getLinkClasses("/inventory")}
+        onClick={() => toggleInventory()}
+      >
         <ShoppingCart className="h-4 w-4" />
         Inventory
         {isInventoryOpen ? (
@@ -48,7 +51,7 @@ const Sidebar = () => {
         ) : (
           <ChevronRight className="ml-auto" size={15} strokeWidth={2.75} />
         )}
-      </p>
+      </Link>
 
       {isInventoryOpen && (
         <div className="ml-8 space-y-2">
@@ -56,7 +59,6 @@ const Sidebar = () => {
             to="/inventory/items"
             className={getLinkClasses("/inventory/items")}
           >
-            <LayoutList size={15} strokeWidth={2.75} />
             Items
           </Link>
         </div>

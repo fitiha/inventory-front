@@ -40,7 +40,11 @@ const Sidebar = () => {
         Home
       </Link>
 
-      <p className={getLinkClasses("/")} onClick={() => toggleInventory()}>
+      <p
+        
+        className={getLinkClasses("/")}
+        onClick={() => toggleInventory()}
+      >
         <ShoppingCart className="h-4 w-4" />
         Inventory
         {isInventoryOpen ? (
@@ -53,10 +57,10 @@ const Sidebar = () => {
       {isInventoryOpen && (
         <div className="ml-8 space-y-2">
           <Link
+          <LayoutList size={15} strokeWidth={2.75} />
             to="/inventory/items"
             className={getLinkClasses("/inventory/items")}
           >
-            <LayoutList size={15} strokeWidth={2.75} />
             Items
           </Link>
         </div>

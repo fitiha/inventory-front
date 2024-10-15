@@ -15,7 +15,7 @@ export function HomeTab() {
   return (
     <Tabs defaultValue="account" className="w-full">
       <TabsList >
-        <Link to="/">
+        <Link to="/start">
             <TabsTrigger value="started">Getting Started</TabsTrigger>
         </Link>
         <TabsTrigger value="announcement">Announcements</TabsTrigger>

@@ -1,0 +1,284 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id                Int                @id @default(autoincrement())
+  name              String
+  description       String?
+  sku               String             @unique
+  barcode           String?
+  quantity          Int                @default(0)
+  price             Float
+  reorderLevel      Int                @default(0)
+  expiryDate        DateTime?
+  categoryId        Int
+  typeId            Int
+  measurementUnitId Int
+  supplierId        Int
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  category          Category           @relation(fields: [categoryId], references: [id])
+  type              ProductType        @relation(fields: [typeId], references: [id])
+  measurementUnit   MeasurementUnit    @relation(fields: [measurementUnitId], references: [id])
+  attributes        ProductAttribute[]
+  productOrders     ProductOrder[]
+  stockLocations    StockLocation[]
+  returns           Return[]
+  salesOrders       SalesOrderItem[]
+  stockAlerts       StockAlert[]
+  supplier          Supplier           @relation(fields: [supplierId], references: [id])
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model ProductType {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model MeasurementUnit {
+  id        Int       @id @default(autoincrement())
+  name      String
+  symbol    String
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model ProductAttribute {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  name      String
+  value     String
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Supplier {
+  id            Int             @id @default(autoincrement())
+  name          String
+  description   String?
+  address       String
+  email         String?
+  phone         String?
+  products      Product[]
+  purchaseOrder PurchaseOrder[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+model StockLocation {
+  id          Int               @id @default(autoincrement())
+  name        String
+  description String?
+  address     String
+  productId   Int?
+  products    OProductLocation[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  Product     Product?          @relation(fields: [productId], references: [id])
+}
+
+model ProductLocation {
+  id         Int           @id @default(autoincrement())
+  locationId Int
+  quantity   Int           @default(0)
+  location   StockLocation @relation(fields: [locationId], references: [id])
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+}
+
+model ProductOrder {
+  id        Int           @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  quantity  Int
+  price     Float
+  order     PurchaseOrder @relation(fields: [orderId], references: [id])
+  product   Product       @relation(fields: [productId], references: [id])
+}
+
+model Return {
+  id         Int      @id @default(autoincrement())
+  productId  Int
+  quantity   Int
+  reason     String?
+  returnDate DateTime @default(now())
+  product    Product  @relation(fields: [productId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model StockAlert {
+  id        Int       @id @default(autoincrement())
+  productId Int
+  alertType AlertType
+  message   String
+  createdAt DateTime  @default(now())
+  product   Product   @relation(fields: [productId], references: [id])
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  fullname  String
+  email     String   @unique
+  password  String
+  salt      String
+  role      UserRole
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  salesOrders SalesOrder[]
+}
+
+model Customer {
+  id              Int           @id @default(autoincrement())
+  type            CustomerType
+  name            String
+  remarks         String?
+  address         String
+  contactPerson   ContactPerson @relation(fields: [contactPersonId], references: [id])
+  contactPersonId Int           @unique
+  salesOrders     SalesOrder[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model ContactPerson {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String
+  address   String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  customers Customer?
+}
+
+model SalesOrder {
+  id                   Int              @id @default(autoincrement())
+  customerId           Int
+  expectedShipmentDate DateTime
+  salesPersonId        Int
+  invoiceId            Int?             @unique
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+  customer             Customer         @relation(fields: [customerId], references: [id])
+  items                SalesOrderItem[]
+  packages             Package[]
+  salesperson          User             @relation(fields: [salesPersonId], references: [id])
+  invoice              Invoice?         @relation(fields: [invoiceId], references: [id])
+}
+
+model PurchaseOrder {
+  id            Int            @id @default(autoincrement())
+  orderNumber   String         @unique
+  supplierId    Int
+  orderDate     DateTime
+  status        OrderStatus
+  totalAmount   Float
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  supplier      Supplier       @relation(fields: [supplierId], references: [id])
+  productOrders ProductOrder[]
+}
+
+model SalesOrderItem {
+  id           Int        @id @default(autoincrement())
+  salesOrderId Int
+  productId    Int
+  quantity     Int
+  price        Float
+  salesOrder   SalesOrder @relation(fields: [salesOrderId], references: [id])
+  product      Product    @relation(fields: [productId], references: [id])
+}
+
+model Package {
+  id             Int            @id @default(autoincrement())
+  salesOrderId   Int
+  shipmentStatus ShipmentStatus @default(NOT_SHIPPED)
+  shipmentId     Int?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  salesOrder     SalesOrder     @relation(fields: [salesOrderId], references: [id])
+  shipment       Shipment?      @relation(fields: [shipmentId], references: [id])
+}
+
+model Shipment {
+  id              Int       @id @default(autoincrement())
+  date            DateTime
+  carrier         String
+  shippingCharges Float
+  packages        Package[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Invoice {
+  id              Int         @id @default(autoincrement())
+  salesOrderId    Int         @unique
+  date            DateTime
+  dueDate         DateTime
+  shippingCharges Float
+  subject         String
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  salesOrder      SalesOrder?
+}
+
+enum ShipmentStatus {
+  NOT_SHIPPED
+  SHIPPED
+  DELIVERED
+  IN_TRANSIT
+  RETURNED
+  CANCELLED
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+enum AlertType {
+  LOW_STOCK
+  OUT_OF_STOCK
+  EXCESS_STOCK
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  STAFF
+}
+
+enum CustomerType {
+  INDIVIDUAL
+  CORPORATE
+  OTHER
+}

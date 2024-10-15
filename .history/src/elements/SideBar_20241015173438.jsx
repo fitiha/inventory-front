@@ -6,7 +6,6 @@ import {
   Users,
   ChevronRight,
   ChevronDown,
-  LayoutList,
 } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -40,7 +39,11 @@ const Sidebar = () => {
         Home
       </Link>
 
-      <p className={getLinkClasses("/")} onClick={() => toggleInventory()}>
+      <p
+        
+        // className={getLinkClasses("/")}
+        onClick={() => toggleInventory()}
+      >
         <ShoppingCart className="h-4 w-4" />
         Inventory
         {isInventoryOpen ? (
@@ -54,9 +57,8 @@ const Sidebar = () => {
         <div className="ml-8 space-y-2">
           <Link
             to="/inventory/items"
-            className={getLinkClasses("/inventory/items")}
+            // className={getLinkClasses("/inventory/items")}
           >
-            <LayoutList size={15} strokeWidth={2.75} />
             Items
           </Link>
         </div>

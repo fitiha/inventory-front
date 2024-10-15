@@ -9,13 +9,13 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Link } from "react-router-dom";
 
 export function HomeTab() {
   return (
     <Tabs defaultValue="account" className="w-full">
       <TabsList >
-        <Link to="/">
+        <Link throw new Error("");
+        >
             <TabsTrigger value="started">Getting Started</TabsTrigger>
         </Link>
         <TabsTrigger value="announcement">Announcements</TabsTrigger>

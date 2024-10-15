@@ -1,24 +1,17 @@
-import {
-  Home,
-  LineChart,
-  Package,
-  ShoppingCart,
-  Users,
-  ChevronRight,
-  ChevronDown,
-  LayoutList,
-} from "lucide-react";
+
+import { Home, LineChart, Package, ShoppingCart, Users, ChevronRight, ChevronDown  } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
-  const location = useLocation();
-  const [active, setActive] = useState(location.pathname);
-  const [isInventoryOpen, setIsInventoryOpen] = useState(false);
+  const location = useLocation(); 
+  const [active, setActive] = useState(location.pathname); 
+  const [isInventoryOpen, setIsInventoryOpen] = useState(false)
 
   const toggleInventory = () => {
-    setIsInventoryOpen((prev) => !prev);
-  };
+    setIsInventoryOpen((prev) => !prev)
+  }
+
 
   const handleClick = (path) => {
     setActive(path); // Update the active state when a link is clicked
@@ -30,7 +23,7 @@ const Sidebar = () => {
     } hover:text-primary`;
 
   return (
-    <nav className="grid items-start font-medium lg:px-4">
+    <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
       <Link
         to="/"
         className={getLinkClasses("/")}
@@ -40,15 +33,20 @@ const Sidebar = () => {
         Home
       </Link>
 
-      <p className={getLinkClasses("/")} onClick={() => toggleInventory()}>
+      <Link 
+        to={"#"}
+        className={getLinkClasses("/inventory")}
+        onClick={() => toggleInventory()}
+      >
         <ShoppingCart className="h-4 w-4" />
         Inventory
-        {isInventoryOpen ? (
-          <ChevronDown className="ml-auto" size={15} strokeWidth={2.75} />
-        ) : (
-          <ChevronRight className="ml-auto" size={15} strokeWidth={2.75} />
-        )}
-      </p>
+        {/* Conditional rendering of the chevron icon */
+        isInventoryOpen ? (
+          }
+
+        <ChevronRight size={20} strokeWidth={2.75} />
+        <ChevronDown size={20} strokeWidth={2.75} />
+      </Link>
 
       {isInventoryOpen && (
         <div className="ml-8 space-y-2">
@@ -56,7 +54,6 @@ const Sidebar = () => {
             to="/inventory/items"
             className={getLinkClasses("/inventory/items")}
           >
-            <LayoutList size={15} strokeWidth={2.75} />
             Items
           </Link>
         </div>
