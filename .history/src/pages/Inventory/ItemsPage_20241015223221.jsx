@@ -24,22 +24,20 @@ import {
 export default function Component() {
   const location = useLocation();
 
-  const isAddItemPage = location.pathname === "/inventory/items/add";
+  const isAddItemPage = location.pathname === '/inventory/items/add';
 
   return (
     <Card className="xl:col-span-2">
       <CardHeader className="flex flex-row items-center">
         <div className="grid gap-2">
-          <CardTitle>
-            {isAddItemPage ? "Add New Item" : "Active items"}
-          </CardTitle>
+          <CardTitle>{isAddItemPage ? "Add New Item" : "Active items"}</CardTitle>
           <CardDescription>
             {isAddItemPage
               ? "Add a new item to your Warehouse."
               : "Active items from your Warehouse."}
           </CardDescription>
         </div>
-        {!isAddItemPage && (
+        {!isAddItemPage && ( 
           <Button asChild size="sm" className="ml-auto gap-1">
             <Link to="/inventory/items/add">
               Add item
@@ -49,26 +47,24 @@ export default function Component() {
         )}
       </CardHeader>
       <CardContent>
+        
         {isAddItemPage ? (
-          <Outlet />
+          <Outlet /> 
         ) : (
+          
           <Table>
             <TableHeader>
               <TableRow>
                 <TableHead>Item Name</TableHead>
                 <TableHead>Shelf ID</TableHead>
-                <TableHead className="hidden sm:table-cell">
-                  Warehouse
-                </TableHead>
+                <TableHead className="hidden sm:table-cell">Warehouse</TableHead>
                 <TableHead>Stock on hand</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               <TableRow>
                 <TableCell>
-                  <Link to={"/inventory/items/one"}>
-                    <div className="font-medium">Sun Chips</div>
-                  </Link>
+                  <div className="font-medium" >Sun Chips</div>
                   <div className="hidden text-sm text-muted-foreground md:inline">
                     2023-06-23
                   </div>

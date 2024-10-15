@@ -64,32 +64,32 @@ export default function Component() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell>
-                  <Link to={"/inventory/items/one"}>
+              <Link to={``}>
+                <TableRow>
+                  <TableCell>
                     <div className="font-medium">Sun Chips</div>
-                  </Link>
-                  <div className="hidden text-sm text-muted-foreground md:inline">
-                    2023-06-23
-                  </div>
-                </TableCell>
-                <TableCell>SC-001-A</TableCell>
-                <TableCell className="gap-1 hidden sm:table-cell">
-                  <Badge
-                    className="text-xs bg-primary text-gray-100"
-                    variant="outline"
-                  >
-                    Gerji
-                  </Badge>
-                  <Badge
-                    className="text-xs bg-primary text-gray-100"
-                    variant="outline"
-                  >
-                    Jemo
-                  </Badge>
-                </TableCell>
-                <TableCell>1500</TableCell>
-              </TableRow>
+                    <div className="hidden text-sm text-muted-foreground md:inline">
+                      2023-06-23
+                    </div>
+                  </TableCell>
+                  <TableCell>SC-001-A</TableCell>
+                  <TableCell className="gap-1 hidden sm:table-cell">
+                    <Badge
+                      className="text-xs bg-primary text-gray-100"
+                      variant="outline"
+                    >
+                      Gerji
+                    </Badge>
+                    <Badge
+                      className="text-xs bg-primary text-gray-100"
+                      variant="outline"
+                    >
+                      Jemo
+                    </Badge>
+                  </TableCell>
+                  <TableCell>1500</TableCell>
+                </TableRow>
+              </Link>
             </TableBody>
           </Table>
         )}

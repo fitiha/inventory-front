@@ -6,7 +6,6 @@ import { CustomersPage } from "./pages/CustomersPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import ItemsPage from "./pages/Inventory/ItemsPage";
 import { AddItem } from "./pages/Inventory/AddItem";
-import { ItemDetails } from "./pages/Inventory/ItemDetails";
 
 function App() {
   return (
@@ -19,7 +18,7 @@ function App() {
         <Route path="inventory">
           <Route path="items" element={<ItemsPage />}>
             <Route path="add" element={<AddItem />} />
-            <Route path="one" element={<ItemDetails />} />
+            
           </Route>
         </Route>
       </Route>

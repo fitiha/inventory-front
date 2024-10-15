@@ -19,7 +19,7 @@ function App() {
         <Route path="inventory">
           <Route path="items" element={<ItemsPage />}>
             <Route path="add" element={<AddItem />} />
-            <Route path="one" element={<ItemDetails />} />
+            <Route path="" element={<ItemDetails />} />
           </Route>
         </Route>
       </Route>
