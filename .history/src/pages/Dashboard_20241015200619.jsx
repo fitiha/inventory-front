@@ -1,6 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
 import { Bell, CircleUser, Package2, Search, Menu } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,20 +10,43 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Sidebar from "@/elements/SideBar";
 import BreadCrumb from "@/elements/BreadCrumb";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export function Dashboard() {
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-      {/* Sidebar for desktop */}
+      {/* Sidebar as Sheet in Mobile (md:hidden) */}
+      <div className="md:hidden">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline" size="icon" className="ml-4">
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Open Sidebar</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="p-4 space-y-2">
+            <div className="flex h-full max-h-screen flex-col gap-2">
+              <Link to="/" className="flex items-center gap-2 font-semibold">
+                <Package2 className="h-6 w-6" />
+                <span>Ethio Inventory</span>
+              </Link>
+              <div className="flex-1">
+                <Sidebar />
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
+
+      {/* Sidebar Static in Desktop (md:block) */}
       <div className="hidden border-r bg-muted/40 md:block">
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link to="/" className="flex items-center gap-2 font-semibold">
               <Package2 className="h-6 w-6" />
-              <span className="">Ethio Inventory</span>
+              <span>Ethio Inventory</span>
             </Link>
             <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
               <Bell className="h-4 w-4" />
@@ -32,27 +54,17 @@ export function Dashboard() {
             </Button>
           </div>
 
+          {/* Static Sidebar */}
           <div className="flex-1">
             <Sidebar />
           </div>
         </div>
       </div>
 
-      {/* Sidebar sheet for mobile */}
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="outline" size="icon" className="shrink-0 md:hidden">
-            <Menu className="h-5 w-5" />
-            <span className="sr-only">Toggle navigation menu</span>
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left" className="flex flex-col">
-          <Sidebar />
-        </SheetContent>
-      </Sheet>
-
+      {/* Main Content */}
       <div className="flex flex-col">
         <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+          {/* Search Bar */}
           <div className="w-full flex-1">
             <form>
               <div className="relative">
@@ -65,6 +77,8 @@ export function Dashboard() {
               </div>
             </form>
           </div>
+
+          {/* User Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="primary" size="icon" className="rounded-full">
@@ -84,9 +98,13 @@ export function Dashboard() {
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
+
+        {/* Breadcrumb */}
         <div className="p-2 pl-4 bg-primary">
           <BreadCrumb />
         </div>
+
+        {/* Main Content */}
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           <Outlet />
         </main>

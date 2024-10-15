@@ -123,7 +123,7 @@ const Sidebar = () => {
       </div>
 
       {/* Desktop View: Static Sidebar */}
-      <div className="hidden md:flex flex-1 space-y-2">
+      <div className="hidden md:flex flex-1">
         <SidebarContent />
       </div>
 

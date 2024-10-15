@@ -15,6 +15,7 @@ function App() {
         <Route path="products" element={<ProductsPage />} />
         <Route path="customers" element={<CustomersPage />} />
         <Route path="analytics" element={<AnalyticsPage />} />
+        {/* Do not specify an element for inventory */}
         <Route path="inventory">
           <Route path="items" element={<ItemsPage />}>
             <Route path="add" element={<AddItem />} />

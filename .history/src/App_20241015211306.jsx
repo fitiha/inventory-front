@@ -5,7 +5,6 @@ import ProductsPage from "./pages/ProductsPage";
 import { CustomersPage } from "./pages/CustomersPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import ItemsPage from "./pages/Inventory/ItemsPage";
-import { AddItem } from "./pages/Inventory/AddItem";
 
 function App() {
   return (

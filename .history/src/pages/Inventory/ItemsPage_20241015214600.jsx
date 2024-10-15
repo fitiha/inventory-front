@@ -24,6 +24,7 @@ import {
 export default function Component() {
   const location = useLocation();
 
+  // Check if the current route is '/inventory/items/add'
   const isAddItemPage = location.pathname === '/inventory/items/add';
 
   return (
@@ -37,7 +38,7 @@ export default function Component() {
               : "Active items from your Warehouse."}
           </CardDescription>
         </div>
-        {!isAddItemPage && ( 
+        {!isAddItemPage && ( // Only show the button when not on Add Item page
           <Button asChild size="sm" className="ml-auto gap-1">
             <Link to="/inventory/items/add">
               Add item
@@ -47,11 +48,11 @@ export default function Component() {
         )}
       </CardHeader>
       <CardContent>
-        
+        {/* Conditionally render the content */}
         {isAddItemPage ? (
-          <Outlet /> 
+          <Outlet /> // Render AddItem component when on /inventory/items/add
         ) : (
-          
+          // Render the table when not on /inventory/items/add
           <Table>
             <TableHeader>
               <TableRow>

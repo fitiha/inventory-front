@@ -40,7 +40,7 @@ const Sidebar = () => {
     } hover:text-primary`;
 
   const SidebarContent = () => (
-    <nav className="space-y-2">
+    <nav className="grid items-start font-medium lg:px-4 space-y-2">
       <Link
         to="/"
         className={getLinkClasses("/")}
@@ -123,7 +123,7 @@ const Sidebar = () => {
       </div>
 
       {/* Desktop View: Static Sidebar */}
-      <div className="hidden md:flex flex-1 space-y-2">
+      <div className="hidden md:flex flex-1">
         <SidebarContent />
       </div>
 

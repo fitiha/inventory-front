@@ -47,11 +47,11 @@ export default function Component() {
         )}
       </CardHeader>
       <CardContent>
-        
+        {/* Conditionally render the content */}
         {isAddItemPage ? (
-          <Outlet /> 
+          <Outlet /> // Render AddItem component when on /inventory/items/add
         ) : (
-          
+          // Render the table when not on /inventory/items/add
           <Table>
             <TableHeader>
               <TableRow>

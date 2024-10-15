@@ -51,7 +51,7 @@ export default function Component() {
         {isAddItemPage ? (
           <Outlet /> 
         ) : (
-          
+          // Render the table when not on /inventory/items/add
           <Table>
             <TableHeader>
               <TableRow>

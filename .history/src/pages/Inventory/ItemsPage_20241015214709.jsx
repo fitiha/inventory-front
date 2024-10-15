@@ -30,7 +30,7 @@ export default function Component() {
     <Card className="xl:col-span-2">
       <CardHeader className="flex flex-row items-center">
         <div className="grid gap-2">
-          <CardTitle>{isAddItemPage ? "Add New Item" : "Active items"}</CardTitle>
+          <CardTitle>"Active items"}</CardTitle>
           <CardDescription>
             {isAddItemPage
               ? "Add a new item to your Warehouse."
