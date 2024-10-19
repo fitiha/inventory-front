@@ -12,7 +12,9 @@ const SalesPage = () => {
             <p className="text-sm text-muted-foreground">
               You can start selling as soon as you add customers.
             </p>
+            <Link] to="/sales/add">
             <Button className="mt-4">Make Sales</Button>
+            </Link>
           </div>
         </div>
       </main>

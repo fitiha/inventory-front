@@ -6,10 +6,9 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import ItemsPage from "./pages/Inventory/ItemsPage";
 import { AddItem } from "./pages/Inventory/AddItem";
 import { ItemDetails } from "./pages/Inventory/ItemDetails";
-import SalesPage from "./pages/Sales/SalesPage";
+import SalesPage from "./pages/SalesPage";
 import { AddCustomer } from "./pages/customer/AddCustomer"; // Import AddCustomer component
 import { CustomerDetails } from "./pages/customer/CustomerDetails";
-import AddSalesOrder from "./pages/Sales/AddSalesOrder";
 
 function App() {
   return (
@@ -32,10 +31,7 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="sales" element={<SalesPage />} >
-          <Route path="add" element={<AddSalesOrder />} />
-          {/* <Route path=":salesId" element={<SalesOrderDetails />} /> */}
-        </Route>
+        
       </Route>
     </Routes>
   );
