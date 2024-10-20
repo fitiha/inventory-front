@@ -157,6 +157,7 @@ const PackagesPage = () => {
             <Link 
             to={`/packages/${pkg.id}`}>
             <span
+            
              className="text-primary font-semibold">{pkg.packageNumber}</span>
             </Link>
             {pkg.shippingCharges && (

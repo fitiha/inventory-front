@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -116,7 +116,7 @@ const PackagesPage = () => {
         <Card
           key={pkg.id}
           className="mb-4 p-2 h-24 cursor-pointer"
-          
+          onClick={() => navigate(`/packages/detail/${pkg.id}`)}
         >
           <CardHeader className="flex flex-row items-center justify-between m-0 p-0">
             <CardTitle className="w-fit mt-2 p-0 pl-4 text-lg">
@@ -154,11 +154,7 @@ const PackagesPage = () => {
             </Popover>
           </CardHeader>
           <CardDescription className="px-4 grid grid-cols-2 ">
-            <Link 
-            to={`/packages/${pkg.id}`}>
-            <span
-             className="text-primary font-semibold">{pkg.packageNumber}</span>
-            </Link>
+            <span className="text-primary font-semibold">{pkg.packageNumber}</span>
             {pkg.shippingCharges && (
               <span className="font-bold"> ${pkg.shippingCharges}</span>
             )}

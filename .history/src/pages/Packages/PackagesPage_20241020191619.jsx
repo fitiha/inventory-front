@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -154,11 +154,10 @@ const PackagesPage = () => {
             </Popover>
           </CardHeader>
           <CardDescription className="px-4 grid grid-cols-2 ">
-            <Link 
-            to={`/packages/${pkg.id}`}>
+            <Link></Link>
             <span
+            onClick={() => navigate(`/packages/${pkg.id}`)}
              className="text-primary font-semibold">{pkg.packageNumber}</span>
-            </Link>
             {pkg.shippingCharges && (
               <span className="font-bold"> ${pkg.shippingCharges}</span>
             )}

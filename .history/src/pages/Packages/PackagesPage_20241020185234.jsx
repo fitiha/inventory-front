@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -52,7 +51,6 @@ const packagesData = [
 ];
 
 const PackagesPage = () => {
-  const navigate = useNavigate();
   const [packages, setPackages] = useState(packagesData);
   const [selectedPackage, setSelectedPackage] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -113,11 +111,7 @@ const PackagesPage = () => {
     return packages
       .filter((pkg) => pkg.status === status)
       .map((pkg) => (
-        <Card
-          key={pkg.id}
-          className="mb-4 p-2 h-24 cursor-pointer"
-          
-        >
+        <Card key={pkg.id} className="mb-4 p-2 h-24">
           <CardHeader className="flex flex-row items-center justify-between m-0 p-0">
             <CardTitle className="w-fit mt-2 p-0 pl-4 text-lg">
               {pkg.customer}
@@ -154,16 +148,13 @@ const PackagesPage = () => {
             </Popover>
           </CardHeader>
           <CardDescription className="px-4 grid grid-cols-2 ">
-            <Link 
-            to={`/packages/${pkg.id}`}>
-            <span
-             className="text-primary font-semibold">{pkg.packageNumber}</span>
-            </Link>
+            <p className="text-primary font-semibold">{pkg.packageNumber}</p>
             {pkg.shippingCharges && (
-              <span className="font-bold"> ${pkg.shippingCharges}</span>
+              <p className="font-bold"> ${pkg.shippingCharges}</p>
             )}
-            <span>{format(pkg.packedDate, "PPP")}</span>
-            {pkg.carrier && <span>{pkg.carrier}</span>}
+            <p>{format(pkg.packedDate, "PPP")}</p>
+            {/* {pkg.shipDate && <p>Ship Date: {format(pkg.shipDate, "PPP")}</p>} */}
+            {pkg.carrier && <p>{pkg.carrier}</p>}
           </CardDescription>
         </Card>
       ));
@@ -171,26 +162,22 @@ const PackagesPage = () => {
 
   return (
     <>
-      <div className="flex items-end justify-between mt-4">
-        <h3 className="text-2xl font-bold">All Packages</h3>
-        <Button
-          className="font-bold flex justify-end gap-1"
-          onClick={() => navigate("/packages/add")}
-        >
+      <div className="flex justify-end mt-">
+        <Button className="font-bold flex justify-end gap-1">
           Add Package
           <PackagePlus />
         </Button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-pink-300 p-4 rounded-lg">
+        <div className="bg-pink-300 p-4">
           <h2 className="text-xl font-bold mb-4">Packages, Not Shipped</h2>
           {renderPackages("not shipped")}
         </div>
-        <div className="bg-yellow-300 p-4 h-dvh rounded-lg">
+        <div className="bg-yellow-300 p-4 h-dvh">
           <h2 className="text-xl font-bold mb-4">Packages, Shipped</h2>
           {renderPackages("shipped")}
         </div>
-        <div className="bg-green-300 p-4 rounded-lg">
+        <div className="bg-green-300 p-4">
           <h2 className="text-xl font-bold mb-4">Packages, Delivered</h2>
           {renderPackages("delivered")}
         </div>

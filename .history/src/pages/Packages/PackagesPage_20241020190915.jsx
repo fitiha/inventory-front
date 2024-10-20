@@ -26,7 +26,7 @@ import {
   DialogFooter,
   DialogHeader,
 } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
+
 
 // Sample JSON data for packages
 const packagesData = [
@@ -116,7 +116,7 @@ const PackagesPage = () => {
         <Card
           key={pkg.id}
           className="mb-4 p-2 h-24 cursor-pointer"
-          
+          onClick={() => navigate(`/packages/detail/${pkg.id}`)}
         >
           <CardHeader className="flex flex-row items-center justify-between m-0 p-0">
             <CardTitle className="w-fit mt-2 p-0 pl-4 text-lg">
@@ -154,16 +154,12 @@ const PackagesPage = () => {
             </Popover>
           </CardHeader>
           <CardDescription className="px-4 grid grid-cols-2 ">
-            <Link 
-            to={`/packages/${pkg.id}`}>
-            <span
-             className="text-primary font-semibold">{pkg.packageNumber}</span>
-            </Link>
+            <p className="text-primary font-semibold">{pkg.packageNumber}</p>
             {pkg.shippingCharges && (
-              <span className="font-bold"> ${pkg.shippingCharges}</span>
+              <p className="font-bold"> ${pkg.shippingCharges}</p>
             )}
-            <span>{format(pkg.packedDate, "PPP")}</span>
-            {pkg.carrier && <span>{pkg.carrier}</span>}
+            <p>{format(pkg.packedDate, "PPP")}</p>
+            {pkg.carrier && <p>{pkg.carrier}</p>}
           </CardDescription>
         </Card>
       ));
@@ -173,13 +169,15 @@ const PackagesPage = () => {
     <>
       <div className="flex items-end justify-between mt-4">
         <h3 className="text-2xl font-bold">All Packages</h3>
+        <Link to={}>
         <Button
           className="font-bold flex justify-end gap-1"
-          onClick={() => navigate("/packages/add")}
+          
         >
           Add Package
           <PackagePlus />
         </Button>
+        </Link>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-pink-300 p-4 rounded-lg">

@@ -155,8 +155,9 @@ const PackagesPage = () => {
           </CardHeader>
           <CardDescription className="px-4 grid grid-cols-2 ">
             <Link 
-            to={`/packages/${pkg.id}`}>
+            to={}>
             <span
+            onClick={() => navigate(`/packages/${pkg.id}`)}
              className="text-primary font-semibold">{pkg.packageNumber}</span>
             </Link>
             {pkg.shippingCharges && (

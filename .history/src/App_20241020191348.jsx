@@ -13,7 +13,6 @@ import AddSalesOrder from "./pages/Sales/AddSalesOrder";
 import { SalesDetail } from "./pages/Sales/SalesDetail";
 import PackagesPage from "./pages/Packages/PackagesPage";
 import AddPackage from "./pages/Packages/AddPackage";
-import PackageDetails from "./pages/Packages/PackageDetails";
 
 function App() {
   return (
@@ -43,7 +42,7 @@ function App() {
 
         <Route path="packages" element={<PackagesPage/>} >
           <Route path="add" element={<AddPackage/>} />
-          <Route path=":packageId" element={<PackageDetails />} />
+          <Route path=":packageId" element={<PackagesPage />} />
         </Route>
       </Route>
     </Routes>

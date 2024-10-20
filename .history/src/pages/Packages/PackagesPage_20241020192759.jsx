@@ -157,6 +157,7 @@ const PackagesPage = () => {
             <Link 
             to={`/packages/${pkg.id}`}>
             <span
+            onClick={() => navigate(`/packages/${pkg.id}`)}
              className="text-primary font-semibold">{pkg.packageNumber}</span>
             </Link>
             {pkg.shippingCharges && (

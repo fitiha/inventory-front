@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -26,7 +26,7 @@ import {
   DialogFooter,
   DialogHeader,
 } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
+
 
 // Sample JSON data for packages
 const packagesData = [
@@ -116,7 +116,7 @@ const PackagesPage = () => {
         <Card
           key={pkg.id}
           className="mb-4 p-2 h-24 cursor-pointer"
-          
+          onClick={() => navigate(`/packages/detail/${pkg.id}`)}
         >
           <CardHeader className="flex flex-row items-center justify-between m-0 p-0">
             <CardTitle className="w-fit mt-2 p-0 pl-4 text-lg">
@@ -154,16 +154,12 @@ const PackagesPage = () => {
             </Popover>
           </CardHeader>
           <CardDescription className="px-4 grid grid-cols-2 ">
-            <Link 
-            to={`/packages/${pkg.id}`}>
-            <span
-             className="text-primary font-semibold">{pkg.packageNumber}</span>
-            </Link>
+            <p className="text-primary font-semibold">{pkg.packageNumber}</p>
             {pkg.shippingCharges && (
-              <span className="font-bold"> ${pkg.shippingCharges}</span>
+              <p className="font-bold"> ${pkg.shippingCharges}</p>
             )}
-            <span>{format(pkg.packedDate, "PPP")}</span>
-            {pkg.carrier && <span>{pkg.carrier}</span>}
+            <p>{format(pkg.packedDate, "PPP")}</p>
+            {pkg.carrier && <p>{pkg.carrier}</p>}
           </CardDescription>
         </Card>
       ));
