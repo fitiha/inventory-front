@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+  .dark {
+    --background: 224 71.4% 4.1%; /* Dark Background */
+    --foreground: 210 20% 98%; /* Light Text */
+    --card: 224 71.4% 4.1%; /* Dark Card */
+    --card-foreground: 210 20% 98%; /* Light Text on Dark Card */
+    --primary: 210 70% 50%; /* Dark Primary */
+    --primary-foreground: 220.9 39.3% 11%; /* Dark Text on Dark Primary */
+    --secondary: 215 27.9% 16.9%; /* Dark Secondary */
+    --secondary-foreground: 210 20% 98%; /* Light Text on Dark Secondary */
+    --muted: 215 27.9% 16.9%; /* Dark Muted */
+    --muted-foreground: 217.9 10.6% 64.9%; /* Dark Muted Text */
+    --accent: 215 27.9% 16.9%; /* Dark Accent */
+    --accent-foreground: 210 20% 98%; /* Light Text on Dark Accent */
+    --destructive: 0 62.8% 30.6%; /* Dark Destructive */
+    --destructive-foreground: 210 20% 98%; /* Light Text on Dark Destructive */
+    --border: 215 27.9% 16.9%; /* Dark Border */
+    --input: 215 27.9% 16.9%; /* Dark Input Background */
+    --ring: 216 12.2% 83.9%; /* Light Ring */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border; /* Apply border color to all elements */
+  }
+  body {
+    @apply bg-background text-foreground; /* Apply background and text colors */
+  }
+}

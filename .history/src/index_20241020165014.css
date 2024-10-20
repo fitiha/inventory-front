@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 30% 95%; /* Light Grey Background */
+    --foreground: 224 71.4% 4.1%; /* Dark Text */
+    --card: 255 255% 100%; /* White Card */
+    --card-foreground: 224 71.4% 4.1%; /* Dark Card Text */
+    --primary: 210 80% 50%; /* Blue for Primary Actions */
+    --primary-foreground: 210 20% 98%; /* White Text on Primary */
+    --secondary: 108 60% 45%; /* Grey for Secondary Elements */
+    --secondary-foreground: 224 71.4% 4.1%; /* Dark Text on Secondary */
+    --muted: 220 14.3% 95.9%; /* Muted Text */
+    --muted-foreground: 220 8.9% 46.1%; /* Dark Muted Text */
+    --accent: 60 100% 50%; /* Green for Success Messages */
+    --accent-foreground: 210 20% 98%; /* White Text on Accent */
+    --destructive: 0 84.2% 60.2%; /* Red for Destructive Actions */
+    --destructive-foreground: 210 20% 98%; /* White Text on Destructive */
+    --border: 220 13% 91%; /* Light Border */
+    --input: 220 13% 91%; /* Input Background */
+    --ring: 224 71.4% 4.1%; /* Dark Ring */
+    --radius: 0.5rem; /* Rounded Corners */
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%; /* Dark Background */
+    --foreground: 210 20% 98%; /* Light Text */
+    --card: 224 71.4% 4.1%; /* Dark Card */
+    --card-foreground: 210 20% 98%; /* Light Text on Dark Card */
+    --primary: 210 70% 50%; /* Dark Primary */
+    --primary-foreground: 220.9 39.3% 11%; /* Dark Text on Dark Primary */
+    --secondary: 215 27.9% 16.9%; /* Dark Secondary */
+    --secondary-foreground: 210 20% 98%; /* Light Text on Dark Secondary */
+    --muted: 215 27.9% 16.9%; /* Dark Muted */
+    --muted-foreground: 217.9 10.6% 64.9%; /* Dark Muted Text */
+    --accent: 215 27.9% 16.9%; /* Dark Accent */
+    --accent-foreground: 210 20% 98%; /* Light Text on Dark Accent */
+    --destructive: 0 62.8% 30.6%; /* Dark Destructive */
+    --destructive-foreground: 210 20% 98%; /* Light Text on Dark Destructive */
+    --border: 215 27.9% 16.9%; /* Dark Border */
+    --input: 215 27.9% 16.9%; /* Dark Input Background */
+    --ring: 216 12.2% 83.9%; /* Light Ring */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border; /* Apply border color to all elements */
+  }
+  body {
+    @apply bg-background text-foreground; /* Apply background and text colors */
+  }
+}
