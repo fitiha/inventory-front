@@ -10,7 +10,6 @@ import SalesPage from "./pages/Sales/SalesPage";
 import { AddCustomer } from "./pages/customer/AddCustomer"; // Import AddCustomer component
 import { CustomerDetails } from "./pages/customer/CustomerDetails";
 import AddSalesOrder from "./pages/Sales/AddSalesOrder";
-import { SalesDetail } from "./pages/Sales/SalesDetail";
 
 function App() {
   return (
@@ -35,7 +34,7 @@ function App() {
 
         <Route path="sales" element={<SalesPage />} >
           <Route path="add" element={<AddSalesOrder />} />
-          <Route path=":salesOrderId" element={<SalesDetail />} />
+          <Route path=":salesId" element={<SalesOrderDetails />} />
         </Route>
       </Route>
     </Routes>

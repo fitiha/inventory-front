@@ -19,14 +19,6 @@ import {
 import { Check, Copy } from "lucide-react";
 import { Tooltip } from "@radix-ui/react-tooltip";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 
 const salesOrders = [
   {
@@ -97,12 +89,7 @@ export const SalesDetail = () => {
       Expected Shipment Date: ${orderToCopy.expectedShipmentDate}
       Sales Person ID: ${orderToCopy.salesPersonId}
       Invoice ID: ${orderToCopy.invoiceId}
-      Items: ${orderToCopy.items
-        .map(
-          (item) =>
-            `Product ID: ${item.productId}, Quantity: ${item.quantity}, Price: ${item.price}`
-        )
-        .join("; ")}
+      Items: ${orderToCopy.items.map(item => `Product ID: ${item.productId}, Quantity: ${item.quantity}, Price: ${item.price}`).join("; ")}
       Created At: ${orderToCopy.createdAt}
     `;
 
@@ -120,20 +107,12 @@ export const SalesDetail = () => {
       });
   };
 
-  const calculateTotalPrice = () => {
-    return salesOrder.items
-      .reduce((total, item) => total + item.quantity * item.price, 0)
-      .toFixed(2);
-  };
-
   return (
     <Card className="overflow-hidden">
       <CardHeader className="flex flex-row items-start bg-muted/50">
         <div className="grid gap-0.5">
           <CardTitle className="group flex items-center gap-2 text-lg">
-            {isEditing
-              ? `Edit Sales Order ${salesOrder.id}`
-              : `Sales Order ${salesOrder.id}`}
+            {isEditing ? `Edit Sales Order ${salesOrder.id}` : `Sales Order ${salesOrder.id}`}
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -158,9 +137,6 @@ export const SalesDetail = () => {
           </CardTitle>
           <CardDescription>Created At: {salesOrder.createdAt}</CardDescription>
         </div>
-        <div className="ml-auto text-lg font-bold text-primary">
-          Total Price: ${calculateTotalPrice()}
-        </div>
       </CardHeader>
 
       <CardContent className="p-6 text-sm">
@@ -178,9 +154,7 @@ export const SalesDetail = () => {
               />
             </div>
             <div>
-              <Label htmlFor="expectedShipmentDate">
-                Expected Shipment Date
-              </Label>
+              <Label htmlFor="expectedShipmentDate">Expected Shipment Date</Label>
               <Input
                 type="text"
                 name="expectedShipmentDate"
@@ -264,9 +238,7 @@ export const SalesDetail = () => {
           <Card className="w-full">
             <CardHeader>
               <CardTitle>Sales Order Details</CardTitle>
-              <CardDescription>
-                Details of the selected sales order.
-              </CardDescription>
+              <CardDescription>Details of the selected sales order.</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid w-full items-center gap-4 md:grid-cols-2">
@@ -288,35 +260,18 @@ export const SalesDetail = () => {
                 </div>
                 <div className="flex flex-col space-y-1.5">
                   <Label>Items</Label>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Product ID</TableHead>
-                        <TableHead>Quantity</TableHead>
-                        <TableHead>Price</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {salesOrder.items.map((item, index) => (
-                        <TableRow key={index}>
-                          <TableCell>{item.productId}</TableCell>
-                          <TableCell>{item.quantity}</TableCell>
-                          <TableCell>{item.price}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                  {salesOrder.items.map((item, index) => (
+                    <div key={index} className="grid gap-2">
+                      <Input value={`Product ID: ${item.productId}`} readOnly />
+                      <Input value={`Quantity: ${item.quantity}`} readOnly />
+                      <Input value={`Price: ${item.price}`} readOnly />
+                    </div>
+                  ))}
                 </div>
               </div>
             </CardContent>
             <CardFooter className="flex justify-between">
-              <Button
-                className="hover:bg-primary"
-                variant="outline"
-                onClick={() => setIsEditing(true)}
-              >
-                Edit
-              </Button>
+              <Button className="hover:bg-primary" variant="outline" onClick={() => setIsEditing(true)}>Edit</Button>
             </CardFooter>
           </Card>
         )}
@@ -324,10 +279,9 @@ export const SalesDetail = () => {
 
       <Separator className="my-4" />
 
-      <CardFooter className="flex flex-row items-center justify-between border-t bg-muted/50 px-6 py-3">
+      <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
         <div className="text-xs text-muted-foreground">
-          Updated{" "}
-          <time dateTime={salesOrder.createdAt}>{salesOrder.createdAt}</time>
+          Updated <time dateTime={salesOrder.createdAt}>{salesOrder.createdAt}</time>
         </div>
       </CardFooter>
     </Card>

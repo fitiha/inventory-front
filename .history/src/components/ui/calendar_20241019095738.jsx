@@ -45,18 +45,18 @@ function Calendar({
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
         day_selected:
-          "bg-primary text-primary-foreground hover:bg-red hover:text-primary-foreground focus:bg-red focus:text-primary-foreground",
-        day_today: "bg-green-500 text-primary-foreground hover:bg-primary/80",
+          "bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground",
+        day_today: "bg-primary text-accent-foreground hover:bg-primary/80",
         day_outside:
           "day-outside text-muted-foreground opacity-50  aria-selected:bg-primary/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
         day_disabled: "text-muted-foreground opacity-50",
         day_range_middle:
-          "aria-selected:bg-primary aria-selected:text-primary-foreground",
+          "aria-selected:bg-primary aria-selected:text-accent-foreground",
         day_hidden: "invisible",
         ...classNames,
       }}
       components={{
-        IconLeft: ({ ...props }) => <ChevronLeftIcon className="h-4 w-4 " />,
+        IconLeft: ({ ...props }) => <ChevronLeftIcon className="h-4 w-4" />,
         IconRight: ({ ...props }) => <ChevronRightIcon className="h-4 w-4" />,
       }}
       {...props} />)

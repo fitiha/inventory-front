@@ -3,15 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/components/ui/calendar"; 
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
 } from "@/components/ui/popover";
-import { Trash2, Plus, CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+import { Trash2, PackagePlus } from "lucide-react";
 
 const AddSalesOrder = () => {
   // State to manage form inputs
@@ -22,8 +20,6 @@ const AddSalesOrder = () => {
     invoiceId: "",
     items: [{ productId: "", quantity: 0, price: 0.0 }],
   });
-
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   // Handle input change
   const handleInputChange = (e) => {
@@ -36,9 +32,9 @@ const AddSalesOrder = () => {
 
   // Handle item change
   const handleItemChange = (index, e) => {
-    const { name, value } = e.target;
+    const { id, value } = e.target;
     const newItems = [...formData.items];
-    newItems[index][name] = value;
+    newItems[index][id] = value;
     setFormData((prevData) => ({
       ...prevData,
       items: newItems,
@@ -88,31 +84,21 @@ const AddSalesOrder = () => {
             {/* Expected Shipment Date */}
             <div className="grid gap-2">
               <Label htmlFor="expectedShipmentDate">Expected Shipment Date</Label>
-              <Popover
-                open={isPopoverOpen}
-                onOpenChange={(open) => setIsPopoverOpen(open)}
-              >
+              <Popover>
                 <PopoverTrigger asChild>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      "w-full justify-start text-left font-normal hover:bg-primary",
-                      !formData.expectedShipmentDate && "text-muted-foreground"
-                    )}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {formData.expectedShipmentDate ? format(formData.expectedShipmentDate, "PPP") : <span>Pick a date</span>}
-                  </Button>
+                  <Input
+                    id="expectedShipmentDate"
+                    value={formData.expectedShipmentDate ? formData.expectedShipmentDate.toLocaleDateString() : ""}
+                    onClick={(e) => e.preventDefault()}
+                    placeholder="Select a date"
+                    readOnly
+                    required
+                  />
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 bg-white" align="start">
+                <PopoverContent>
                   <Calendar
-                    mode="single"
                     selected={formData.expectedShipmentDate}
-                    onSelect={(date) => {
-                      setFormData((prevData) => ({ ...prevData, expectedShipmentDate: date }));
-                      setIsPopoverOpen(false);
-                    }}
-                    initialFocus
+                    onSelect={(date) => setFormData((prevData) => ({ ...prevData, expectedShipmentDate: date }))}
                   />
                 </PopoverContent>
               </Popover>
@@ -144,11 +130,11 @@ const AddSalesOrder = () => {
             {/* Items */}
             <div className="col-span-2">
               <Card className="mb-4">
-                <CardHeader className="flex justify-between items-center">
+                <CardHeader className="flex justify-between items-start">
                   <div className="flex items-center gap-2">
                     <CardTitle>Items</CardTitle>
                     <Button className="hover:bg-green-700" type="button" variant="outline" onClick={addItem}>
-                      <Plus size={16} />
+                    <PackagePlus />
                     </Button>
                   </div>
                 </CardHeader>
@@ -158,8 +144,7 @@ const AddSalesOrder = () => {
                       <div className="grid gap-2">
                         <Label htmlFor={`productId-${index}`}>Product ID</Label>
                         <Input
-                          id={`productId-${index}`}
-                          name="productId"
+                          id="productId"
                           value={item.productId}
                           onChange={(e) => handleItemChange(index, e)}
                           placeholder="Product ID"
@@ -169,8 +154,7 @@ const AddSalesOrder = () => {
                       <div className="grid gap-2">
                         <Label htmlFor={`quantity-${index}`}>Quantity</Label>
                         <Input
-                          id={`quantity-${index}`}
-                          name="quantity"
+                          id="quantity"
                           type="number"
                           value={item.quantity}
                           onChange={(e) => handleItemChange(index, e)}
@@ -181,8 +165,7 @@ const AddSalesOrder = () => {
                       <div className="grid gap-2">
                         <Label htmlFor={`price-${index}`}>Price</Label>
                         <Input
-                          id={`price-${index}`}
-                          name="price"
+                          id="price"
                           type="number"
                           step="0.01"
                           value={item.price}

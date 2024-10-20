@@ -23,8 +23,6 @@ const AddSalesOrder = () => {
     items: [{ productId: "", quantity: 0, price: 0.0 }],
   });
 
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
   // Handle input change
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -36,9 +34,9 @@ const AddSalesOrder = () => {
 
   // Handle item change
   const handleItemChange = (index, e) => {
-    const { name, value } = e.target;
+    const { id, value } = e.target;
     const newItems = [...formData.items];
-    newItems[index][name] = value;
+    newItems[index][id] = value;
     setFormData((prevData) => ({
       ...prevData,
       items: newItems,
@@ -88,15 +86,12 @@ const AddSalesOrder = () => {
             {/* Expected Shipment Date */}
             <div className="grid gap-2">
               <Label htmlFor="expectedShipmentDate">Expected Shipment Date</Label>
-              <Popover
-                open={isPopoverOpen}
-                onOpenChange={(open) => setIsPopoverOpen(open)}
-              >
+              <Popover>
                 <PopoverTrigger asChild>
                   <Button
                     variant={"outline"}
                     className={cn(
-                      "w-full justify-start text-left font-normal hover:bg-primary",
+                      "w-full hover:bg- justify-start text-left font-normal",
                       !formData.expectedShipmentDate && "text-muted-foreground"
                     )}
                   >
@@ -104,14 +99,11 @@ const AddSalesOrder = () => {
                     {formData.expectedShipmentDate ? format(formData.expectedShipmentDate, "PPP") : <span>Pick a date</span>}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 bg-white" align="start">
+                <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
                     mode="single"
                     selected={formData.expectedShipmentDate}
-                    onSelect={(date) => {
-                      setFormData((prevData) => ({ ...prevData, expectedShipmentDate: date }));
-                      setIsPopoverOpen(false);
-                    }}
+                    onSelect={(date) => setFormData((prevData) => ({ ...prevData, expectedShipmentDate: date }))}
                     initialFocus
                   />
                 </PopoverContent>
@@ -159,7 +151,6 @@ const AddSalesOrder = () => {
                         <Label htmlFor={`productId-${index}`}>Product ID</Label>
                         <Input
                           id={`productId-${index}`}
-                          name="productId"
                           value={item.productId}
                           onChange={(e) => handleItemChange(index, e)}
                           placeholder="Product ID"
@@ -170,7 +161,6 @@ const AddSalesOrder = () => {
                         <Label htmlFor={`quantity-${index}`}>Quantity</Label>
                         <Input
                           id={`quantity-${index}`}
-                          name="quantity"
                           type="number"
                           value={item.quantity}
                           onChange={(e) => handleItemChange(index, e)}
@@ -182,7 +172,6 @@ const AddSalesOrder = () => {
                         <Label htmlFor={`price-${index}`}>Price</Label>
                         <Input
                           id={`price-${index}`}
-                          name="price"
                           type="number"
                           step="0.01"
                           value={item.price}

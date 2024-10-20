@@ -19,14 +19,6 @@ import {
 import { Check, Copy } from "lucide-react";
 import { Tooltip } from "@radix-ui/react-tooltip";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 
 const salesOrders = [
   {
@@ -120,12 +112,6 @@ export const SalesDetail = () => {
       });
   };
 
-  const calculateTotalPrice = () => {
-    return salesOrder.items
-      .reduce((total, item) => total + item.quantity * item.price, 0)
-      .toFixed(2);
-  };
-
   return (
     <Card className="overflow-hidden">
       <CardHeader className="flex flex-row items-start bg-muted/50">
@@ -157,9 +143,6 @@ export const SalesDetail = () => {
             </TooltipProvider>
           </CardTitle>
           <CardDescription>Created At: {salesOrder.createdAt}</CardDescription>
-        </div>
-        <div className="ml-auto text-lg font-bold text-primary">
-          Total Price: ${calculateTotalPrice()}
         </div>
       </CardHeader>
 
@@ -210,7 +193,6 @@ export const SalesDetail = () => {
               <Label htmlFor="items">Items</Label>
               {editedSalesOrder.items.map((item, index) => (
                 <div key={index} className="grid gap-2">
-                  <Label htmlFor={`productId-${index}`}>Product ID</Label>
                   <Input
                     type="text"
                     name={`productId-${index}`}
@@ -225,7 +207,6 @@ export const SalesDetail = () => {
                     }}
                     placeholder="Product ID"
                   />
-                  <Label htmlFor={`quantity-${index}`}>Quantity</Label>
                   <Input
                     type="number"
                     name={`quantity-${index}`}
@@ -240,7 +221,6 @@ export const SalesDetail = () => {
                     }}
                     placeholder="Quantity"
                   />
-                  <Label htmlFor={`price-${index}`}>Price</Label>
                   <Input
                     type="number"
                     name={`price-${index}`}
@@ -288,24 +268,13 @@ export const SalesDetail = () => {
                 </div>
                 <div className="flex flex-col space-y-1.5">
                   <Label>Items</Label>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Product ID</TableHead>
-                        <TableHead>Quantity</TableHead>
-                        <TableHead>Price</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {salesOrder.items.map((item, index) => (
-                        <TableRow key={index}>
-                          <TableCell>{item.productId}</TableCell>
-                          <TableCell>{item.quantity}</TableCell>
-                          <TableCell>{item.price}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                  {salesOrder.items.map((item, index) => (
+                    <div key={index} className="grid gap-2">
+                      <Input value={`Product ID: ${item.productId}`} readOnly />
+                      <Input value={`Quantity: ${item.quantity}`} readOnly />
+                      <Input value={`Price: ${item.price}`} readOnly />
+                    </div>
+                  ))}
                 </div>
               </div>
             </CardContent>
@@ -324,7 +293,7 @@ export const SalesDetail = () => {
 
       <Separator className="my-4" />
 
-      <CardFooter className="flex flex-row items-center justify-between border-t bg-muted/50 px-6 py-3">
+      <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
         <div className="text-xs text-muted-foreground">
           Updated{" "}
           <time dateTime={salesOrder.createdAt}>{salesOrder.createdAt}</time>

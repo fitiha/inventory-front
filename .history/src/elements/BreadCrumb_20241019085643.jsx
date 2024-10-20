@@ -10,7 +10,7 @@ import React from "react";
 const breadcrumbStartMap = {
   "/inventory": "Inventory",
   "/customers": "Customers",
-  "/sales": "Sales",
+  "/"
   "/analytics": "Analytics",
   "/setting": "Setting",
 };
