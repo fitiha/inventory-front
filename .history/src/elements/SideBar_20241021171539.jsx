@@ -108,18 +108,18 @@ const Sidebar = () => {
       </Link>
 
       <Link
-        to={"/packages"}
-        className={getLinkClasses("/packages")}
-        onClick={() => handleClick("/packages")}
+      to={"/packages"}
+      className={getLinkClasses("/packages")}
+      onClick={() => handleClick("/packages")}
       >
         <Package className="h-4 w-4" />
         Packages
       </Link>
 
       <Link
-        to={"/shipments"}
-        className={getLinkClasses("/shipments")}
-        onClick={() => handleClick("/shipments")}
+      to={"/shipments"}
+      className={getLinkClasses("/shipments")}
+      onClick={() => handleClick("/shipments")}
       >
         <Truck className="h-4 w-4" />
         Shipments

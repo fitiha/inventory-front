@@ -112,7 +112,11 @@ const PackagesPage = () => {
     return packages
       .filter((pkg) => pkg.status === status)
       .map((pkg) => (
-        <Card key={pkg.id} className="mb-4 p-2 h-24 cursor-pointer">
+        <Card
+          key={pkg.id}
+          className="mb-4 p-2 h-24 cursor-pointer"
+          
+        >
           <CardHeader className="flex flex-row items-center justify-between m-0 p-0">
             <CardTitle className="w-fit mt-2 p-0 pl-4 text-lg">
               {pkg.customer}
@@ -149,10 +153,10 @@ const PackagesPage = () => {
             </Popover>
           </CardHeader>
           <CardDescription className="px-4 grid grid-cols-2 ">
-            <Link to={`/packages/${pkg.id}`}>
-              <span className="text-primary font-semibold">
-                {pkg.packageNumber}
-              </span>
+            <Link 
+            to={`/packages/${pkg.id}`}>
+            <span
+             className="text-primary font-semibold">{pkg.packageNumber}</span>
             </Link>
             {pkg.shippingCharges && (
               <span className="font-bold"> ${pkg.shippingCharges}</span>
@@ -168,12 +172,13 @@ const PackagesPage = () => {
     <>
       <div className="flex items-end justify-between mt-4">
         <h3 className="text-2xl font-bold">All Packages</h3>
-        <Link to={"/packages/add"}>
-          <Button className="font-bold flex justify-end gap-1">
-            Add Package
-            <PackagePlus />
-          </Button>
-        </Link>
+        <Button
+          className="font-bold flex justify-end gap-1"
+          onClick={() => navigate("/packages/add")}
+        >
+          Add Package
+          <PackagePlus />
+        </Button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-pink-300 p-4 rounded-lg">

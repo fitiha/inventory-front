@@ -210,7 +210,7 @@ export const AddPackage = () => {
                   <Button
                     variant={"outline"}
                     className={cn(
-                      "w-full justify-start text-left font-normal hover:bg-primary",
+                      "w-full justify-start text-left font-normal",
                       !formData.packedDate && "text-muted-foreground"
                     )}
                   >

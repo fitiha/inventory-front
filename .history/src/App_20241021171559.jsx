@@ -14,7 +14,6 @@ import { SalesDetail } from "./pages/Sales/SalesDetail";
 import PackagesPage from "./pages/Packages/PackagesPage";
 import { AddPackage } from "./pages/Packages/AddPackage";
 import PackageDetails from "./pages/Packages/PackageDetails";
-import ShipmentsPage from "./pages/Shipment/ShipmentsPage";
 
 function App() {
   return (
@@ -47,7 +46,7 @@ function App() {
           <Route path=":packageId" element={<PackageDetails />} />
         </Route>
 
-        <Route path="shipments" element={<ShipmentsPage />} />
+        <Route path="shipments" element={<PackagesPage />} />
       </Route>
     </Routes>
   );

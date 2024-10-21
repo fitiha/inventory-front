@@ -132,7 +132,8 @@ export const AddPackage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data:", JSON.stringify(formData, null, 2));
-    
+    // Simulate form submission
+    alert("Package created successfully!");
     // Reset form
     setFormData({
       customerId: "",
@@ -210,7 +211,7 @@ export const AddPackage = () => {
                   <Button
                     variant={"outline"}
                     className={cn(
-                      "w-full justify-start text-left font-normal hover:bg-primary",
+                      "w-full justify-start text-left font-normal",
                       !formData.packedDate && "text-muted-foreground"
                     )}
                   >
@@ -224,7 +225,6 @@ export const AddPackage = () => {
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0 bg-white" align="start">
                   <Calendar
-                  
                     mode="single"
                     selected={formData.packedDate}
                     onSelect={(date) => {

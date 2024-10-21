@@ -12,16 +12,17 @@ import { CustomerDetails } from "./pages/customer/CustomerDetails";
 import AddSalesOrder from "./pages/Sales/AddSalesOrder";
 import { SalesDetail } from "./pages/Sales/SalesDetail";
 import PackagesPage from "./pages/Packages/PackagesPage";
-import { AddPackage } from "./pages/Packages/AddPackage";
+
 import PackageDetails from "./pages/Packages/PackageDetails";
-import ShipmentsPage from "./pages/Shipment/ShipmentsPage";
+import { AddPackage } from "./pages/Packages/AddPackage";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Dashboard />}>
         <Route index element={<HomePage />} />
-
+        
+        
         <Route path="customers" element={<CustomersPage />}>
           <Route path="add" element={<AddCustomer />} />
           <Route path=":customerId" element={<CustomerDetails />} />
@@ -36,7 +37,7 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="sales" element={<SalesPage />}>
+        <Route path="sales" element={<SalesPage />} >
           <Route path="add" element={<AddSalesOrder />} />
           <Route path=":salesOrderId" element={<SalesDetail />} />
         </Route>
@@ -46,8 +47,6 @@ function App() {
           <Route path="add" element={<AddPackage />} />
           <Route path=":packageId" element={<PackageDetails />} />
         </Route>
-
-        <Route path="shipments" element={<ShipmentsPage />} />
       </Route>
     </Routes>
   );

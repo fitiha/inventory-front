@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 // Sample JSON data for packages
 const packagesData = [
@@ -77,15 +74,12 @@ const PackageDetails = () => {
   }
 
   return (
-    <Card className="mx-auto w-full max-w-4xl p-6">
+    <Card className="mx-auto w-full">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold">Package Details</CardTitle>
-        <CardDescription className="text-muted-foreground">
-          Detailed information about the package
-        </CardDescription>
+        <CardTitle>Package Details</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-2 gap-4">
           <div>
             <p className="font-bold">Package Number:</p>
             <p>{packageDetails.packageNumber}</p>
@@ -129,14 +123,13 @@ const PackageDetails = () => {
             </div>
           )}
         </div>
-        <Separator className="my-4" />
-        <h3 className="text-lg font-bold mb-4">Items</h3>
-        <ScrollArea className="h-64">
-          <div className="grid grid-cols-4 gap-4 items-center mb-4 font-bold">
-            <p>Item and Description</p>
-            <p>Ordered Amount</p>
-            <p>Packed Amount</p>
-            <p>Quantity to Pack</p>
+        <div className="mt-4">
+          <h3 className="text-lg font-bold">Items</h3>
+          <div className="grid grid-cols-4 gap-4 items-center mb-4">
+            <p className="font-bold">Item and Description</p>
+            <p className="font-bold">Ordered Amount</p>
+            <p className="font-bold">Packed Amount</p>
+            <p className="font-bold">Quantity to Pack</p>
           </div>
           {packageDetails.items.map((item, index) => (
             <div key={index} className="grid grid-cols-4 gap-4 items-center mb-4">
@@ -146,7 +139,7 @@ const PackageDetails = () => {
               <p>{item.quantityToPack}</p>
             </div>
           ))}
-        </ScrollArea>
+        </div>
       </CardContent>
     </Card>
   );

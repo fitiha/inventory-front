@@ -12,7 +12,7 @@ const breadcrumbStartMap = {
   "/customers": "Customers",
   "/sales": "Sales",
   "/packages": "Packages",
-  "/shipments": "Shipments",
+  "/"
   "/analytics": "Analytics",
   "/setting": "Setting",
 };
